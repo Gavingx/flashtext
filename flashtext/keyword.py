@@ -2,6 +2,22 @@ import os
 import string
 import io
 
+"""
+edit by gavin:
+
+string.ascii_letters: 生成所有的字母。包括：abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+string.digits: 生成所有的数字：包括: 0123456789
+
+当使用in和not in 的时候会调用__contains___方法
+当使用len()函数的时候会调用__len__方法
+当取切片的时候会调用方法__getitem__方法
+当属性以索引的方式被赋值会调用__setitem__方法
+当删除属性时调用__delitem__方法
+调用for循环，就必须实现__iter__方法，然后，python的for循环就会不断调用迭代对象的next()方法拿到循环的下一个值\
+dict.setdefault方法: 如果字典中包含有给定键，则返回该键对应的值，否则返回为该键设置的值
+
+"""
+
 
 class KeywordProcessor(object):
     """KeywordProcessor
@@ -465,7 +481,7 @@ class KeywordProcessor(object):
             >>> keyword_processor.add_keyword('Big Apple', 'New York')
             >>> keyword_processor.add_keyword('Bay Area')
             >>> keywords_found = keyword_processor.extract_keywords('I love Big Apple and Bay Area.')
-            >>> keywords_found
+               >>> keywords_found
             >>> ['New York', 'Bay Area']
             >>> keywords_found = keyword_processor.extract_keywords('I love Big Aple and Baay Area.', max_cost=1)
             >>> keywords_found
@@ -784,7 +800,6 @@ class KeywordProcessor(object):
 
         for char, node in start_node.items():
             yield from self._levenshtein_rec(char, node, word, rows, max_cost, depth=1)
-
 
     def _levenshtein_rec(self, char, node, word, rows, max_cost, depth=0):
         n_columns = len(word) + 1
